@@ -1,14 +1,13 @@
 import express from "express";
-import { places } from "./places";
+import { ApolloServer } from "apollo-server-express";
+import { schema } from './graphql';
+
 
 const app = express();
 const port = 9000;
+const server = new ApolloServer({ schema });
 
-
-app.get('/', (_req, res) => res.send('Scatter Live!'));
-app.get("/places", (_req, res) => {
-  res.send(places);
-});
+server.applyMiddleware({ app, path: "/api" });
 app.listen(port);
 
 console.log(`[app] : http://localhost:${port}`);
