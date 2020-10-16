@@ -1,11 +1,33 @@
-import { GraphQLSchema, GraphQLObjectType, GraphQLString } from "graphql";
+import {
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull, 
+} from "graphql";
+import { places } from './places'
+
+const Place = new GraphQLObjectType({
+  name: "Place",
+  fields: {
+    id: {type: GraphQLNonNull(GraphQLID)},
+    name: {type: GraphQLString},
+    address: {type: GraphQLString},
+    price: {type: GraphQLInt},
+    tags: {type: GraphQLList(GraphQLString)},
+  }
+});
 
 const query = new GraphQLObjectType({
   name: "Query",
   fields: {
-    hello: {
-      type: GraphQLString,
-      resolve: () => "Hello from the Query!"
+    places: {
+      type: GraphQLNonNull(GraphQLList(GraphQLNonNull(Place))),
+      resolve: () => {
+        return places;
+      }
     }
   }
 });
@@ -13,9 +35,20 @@ const query = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    hello: {
-      type: GraphQLString,
-      resolve: () => "Hello from the Mutation!"
+    deletePlace: {
+      type: GraphQLNonNull(Place),
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) }
+      },
+      resolve: (_root, { id }) => {
+        for (let i = 0; i < places.length; i++) {
+          if (places[i].id === id) {
+            return places.splice(i, 1)[0];
+          }
+        }
+
+        throw new Error("failed to deleted listing");
+      }
     }
   }
 });
