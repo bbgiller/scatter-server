@@ -1,7 +1,7 @@
 import { Collection, ObjectID } from "mongodb";
 
 export interface Place {
-  id: ObjectID;
+  _id: ObjectID;
   name: string;
   address: string;
   price: number;
