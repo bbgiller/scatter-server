@@ -7,13 +7,24 @@ export const typeDefs = gql`
     address: String
     price: Int
     tags: [String]
-  }
+  },
+  type User {
+  firstName: String
+  lastName: String
+  phoneNumber: String
+  email: String
+  city: String
+  country: String
+  birthday: String
+}
   
   type Query {
     places: [Place!]
+    users: [User!]
   }
 
   type Mutation {
     deletePlace(id: ID!): Place!
+    deleteUser(id: ID!): User!
   }
 `;

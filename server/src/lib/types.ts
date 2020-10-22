@@ -8,7 +8,20 @@ export interface Place {
   tags: string[];
 }
 
+export interface User {
+  _id: ObjectID;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  city: string;
+  country: string;
+  birthday: Date;
+}
+
+
 export interface Database {
+  users: Collection<User>;
   places: Collection<Place>;
 
 }

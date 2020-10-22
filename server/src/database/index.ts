@@ -2,9 +2,9 @@ import { MongoClient } from "mongodb";
 import { Database } from "../lib/types";
 
 
-const user = "bbgiller456";
-const userPassword = "sVlqUgXuTNqFJaeo"; // user password
-const cluster = "cluster0.swlvu";
+// const user = "bbgiller456";
+// const userPassword = "sVlqUgXuTNqFJaeo"; // user password
+// const cluster = "cluster0.swlvu";
 
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net`;
 
@@ -16,6 +16,7 @@ export const connectDatabase = async (): Promise<Database> => {
   const db = client.db("main");
 
   return {
-    places: db.collection("test_places")
+    places: db.collection("test_places"),
+    users: db.collection("users")
   };
 };
