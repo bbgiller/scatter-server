@@ -5,6 +5,7 @@ import { Database, Place } from "../../../lib/types";
 export const placeResolvers: IResolvers = {
   Query: {
     places: async (_root: undefined, _args: {}, { db }: { db: Database }) => {
+      console.log('here 123')
       return await db.places.find({}).toArray();
     }
   },

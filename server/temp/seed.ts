@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 import { ObjectID, ObjectId } from "mongodb";
 import { connectDatabase } from "../src/database";
